@@ -58,7 +58,7 @@ fi
 function vi_mode_prompt_info() {
   if [[ "$VI_KEYMAP" = "vicmd" ]]; then
     echo $COMMAND_INDICATOR
-  elif [[ "$VI_KEYMAP" = "visual" ]] || [[ "$VI_KEYMAP" = "vivis" ]]; then
+  elif [[ "$VI_KEYMAP" = "visual" ]] || [[ "$VI_KEYMAP" = "vivis" ]] || [[ "$VI_KEYMAP" = "vivli" ]]; then
     echo $VISUAL_INDICATOR
   elif [[ "$VI_KEYMAP" = "viins" ]] || [[ "$VI_KEYMAP" = "main" ]]; then
     echo $INSERT_INDICATOR
