@@ -33,7 +33,7 @@ set -e
 
 # Default settings
 ZSH=${ZSH:-~/.oh-my-zsh}
-REPO=${REPO:-ohmyzsh/ohmyzsh}
+REPO=${REPO:-naripok/ohmyzsh}
 REMOTE=${REMOTE:-https://github.com/${REPO}.git}
 BRANCH=${BRANCH:-master}
 
