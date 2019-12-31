@@ -1,7 +1,11 @@
 # Updates editor information when the keymap changes.
-if [[ "$VI_KEYMAP" == "" ]]; then
-    VI_KEYMAP=main
-fi
+# if [[ "$VI_KEYMAP" == "" ]]; then
+#     VI_KEYMAP=main
+# fi
+
+# set vi command mode at startup
+function zle-line-init() { zle -K vicmd; }
+zle -N zle-line-init
 
 function zle-keymap-select() {
   # update keymap variable for the prompt
