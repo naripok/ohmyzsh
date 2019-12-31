@@ -1,11 +1,8 @@
-# Updates editor information when the keymap changes.
-# if [[ "$VI_KEYMAP" == "" ]]; then
-#     VI_KEYMAP=main
-# fi
+# set vi insert mode at startup
+bindkey -v
 
-# set vi command mode at startup
-function zle-line-init() { zle -K vicmd; }
-zle -N zle-line-init
+# faster vi mode switching
+export KEYTIMEOUT=1
 
 function zle-keymap-select() {
   # update keymap variable for the prompt
@@ -14,14 +11,17 @@ function zle-keymap-select() {
   zle reset-prompt
   zle -R
 }
-
 zle -N zle-keymap-select
+
+function zle-line-init() {
+  zle zle-keymap-select
+}
+zle -N zle-line-init
 
 function vi-accept-line() {
   VI_KEYMAP=main
   zle accept-line
 }
-
 zle -N vi-accept-line
 
 # use custom accept-line widget to update $VI_KEYMAP
