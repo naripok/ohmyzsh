@@ -42,27 +42,29 @@ function zle-line-init() {
 }
 zle -N zle-line-init
 
-# function vi-accept-line() {
-#   VI_KEYMAP=vicmd
-#   zle accept-line
-# }
-# zle -N vi-accept-line
-# 
-# # use custom accept-line widget to update $VI_KEYMAP
-# bindkey -M vicmd '^J' vi-accept-line
-# bindkey -M vicmd '^M' vi-accept-line
-
 # if mode indicator wasn't setup by theme, define default
-if [[ "$COMMAND_INDICATOR" == "" ]]; then
-  COMMAND_INDICATOR="%{$fg_bold[red]%}|∴|%{$reset_color%}"
-fi
-
 if [[ "$INSERT_INDICATOR" == "" ]]; then
   INSERT_INDICATOR=" ∴ "
 fi
 
+if [[ "$COMMAND_INDICATOR" == "" ]]; then
+  COMMAND_INDICATOR="%{$fg_bold[red]%}|∴|%{$reset_color%}"
+fi
+
+if [[ "$VISUAL_INDICATOR" == "" ]]; then
+  VISUAL_INDICATOR="%{$fg_bold[green]%}|∴|%{$reset_color%}"
+fi
+
 function vi_mode_prompt_info() {
-  echo "${${VI_KEYMAP/vicmd/$COMMAND_INDICATOR}/(main|viins)/$INSERT_INDICATOR}"
+  if [[ "$VI_KEYMAP" = "vicmd" ]]; then
+    echo $COMMAND_INDICATOR
+  elif [[ "$VI_KEYMAP" = "visual" ]] || [[ "$VI_KEYMAP" = "vivis" ]]; then
+    echo $VISUAL_INDICATOR
+  elif [[ "$VI_KEYMAP" = "viins" ]] || [[ "$VI_KEYMAP" = "main" ]]; then
+    echo $INSERT_INDICATOR
+  else
+    echo ">"
+  fi
 }
 
 # define right prompt, if it wasn't defined by a theme
